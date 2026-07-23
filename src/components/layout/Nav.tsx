@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import icon from '@/assets/icon.png';
 
+const HOME = import.meta.env.BASE_URL;
+
 const LINKS = [
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#features', label: 'Features' },
-  { href: '#roadmap', label: "What's next" },
+  { href: `${HOME}#how-it-works`, label: 'How it works' },
+  { href: `${HOME}#features`, label: 'Features' },
+  { href: `${HOME}#roadmap`, label: "What's next" },
 ];
 
 export default function Nav() {
@@ -28,7 +30,7 @@ export default function Nav() {
       }}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2">
+        <a href={`${HOME}#top`} className="flex items-center gap-2">
           <img src={icon} alt="" className="h-8 w-8 rounded-lg" />
           <span className="font-display text-sm font-semibold tracking-wide text-ink-50">GroceryScan</span>
         </a>
@@ -42,7 +44,7 @@ export default function Nav() {
           ))}
         </ul>
         <a
-          href="#cta"
+          href={`${HOME}#cta`}
           className="rounded-full bg-mint-500 px-4 py-2 text-sm font-semibold text-navy-950 transition-transform hover:scale-105"
         >
           Coming soon

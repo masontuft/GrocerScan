@@ -1,5 +1,7 @@
 import icon from '@/assets/icon.png';
 
+const HOME = import.meta.env.BASE_URL;
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/5 bg-navy-950">
@@ -13,18 +15,23 @@ export default function Footer() {
         </div>
         <ul className="flex flex-wrap items-center justify-center gap-6 text-sm text-ink-300">
           <li>
-            <a href="#how-it-works" className="hover:text-ink-50">
+            <a href={`${HOME}#how-it-works`} className="hover:text-ink-50">
               How it works
             </a>
           </li>
           <li>
-            <a href="#features" className="hover:text-ink-50">
+            <a href={`${HOME}#features`} className="hover:text-ink-50">
               Features
             </a>
           </li>
           <li>
-            <a href="#roadmap" className="hover:text-ink-50">
+            <a href={`${HOME}#roadmap`} className="hover:text-ink-50">
               What's next
+            </a>
+          </li>
+          <li>
+            <a href={`${HOME}privacy.html`} className="hover:text-ink-50">
+              Privacy Policy
             </a>
           </li>
           <li>
