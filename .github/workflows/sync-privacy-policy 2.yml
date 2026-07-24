@@ -1,0 +1,37 @@
+name: Sync Privacy Policy
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # daily at 13:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: node scripts/sync-privacy-policy.mjs
+
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore: sync privacy policy from Google Doc'
+          title: 'Sync privacy policy from Google Doc'
+          body: |
+            Automated update — the source [Google Doc](https://docs.google.com/document/d/e/2PACX-1vSUAWMYdMYIzpFnxHc-k4OJo_DGWHf0MA1nk06g9XpSRsx3rUFHrvKaZz__gYSR2tlpW0jaGkLk_2XP/pub) changed since the last sync.
+
+            The doc has no real heading/list markup, so `scripts/sync-privacy-policy.mjs` infers structure from line shape (short + blank line before it = heading, `- ` prefix = bullet). Skim the rendered diff in `src/content/privacyPolicy.generated.ts` before merging in case something got misclassified.
+          branch: sync/privacy-policy
+          delete-branch: true
+          add-paths: src/content/privacyPolicy.generated.ts
